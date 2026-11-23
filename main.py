@@ -33,6 +33,8 @@ def validate(text):
         raise ValueError("entry must not be only white space")
     if text != text.strip():
         raise ValueError("entry must not have leading or trailing whitespace")
+    if any(ord(ch) < 32 or ord(ch) == 127 for ch in text):
+        raise ValueError("entry must not contain control characters")
     if "\n" in text or "\r" in text:
         raise ValueError("entry must be a single line")
     return text
